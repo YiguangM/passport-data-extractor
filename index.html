@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f0e8">
+  <title>Passage | Passport data extractor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Passage home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>passage</span>
+      </a>
+      <div class="topbar-note"><span class="status-dot"></span> Runs locally in your browser</div>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">PASSPORT DATA EXTRACTOR <span>/</span> v1.0</p>
+      <h1 id="page-title">Turn a passport scan<br><em>into usable data.</em></h1>
+      <p class="lede">Upload an image or PDF. We’ll read the document, validate its MRZ, and lay every detected field out for review.</p>
+    </section>
+
+    <section class="workspace" aria-label="Passport extraction workspace">
+      <div class="upload-panel" id="drop-zone">
+        <div class="upload-inner">
+          <div class="passport-glyph" aria-hidden="true"><span>✦</span></div>
+          <p class="upload-kicker">READY WHEN YOU ARE</p>
+          <h2>Drop your passport here</h2>
+          <p class="upload-help">PNG, JPG, WEBP or PDF · up to 15 MB</p>
+          <label class="button button-primary" for="file-input">Choose a file <span aria-hidden="true">↗</span></label>
+          <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" hidden>
+          <p class="privacy-note"><span aria-hidden="true">⌁</span> Your document stays in this browser</p>
+        </div>
+        <div class="drop-overlay">Release to scan</div>
+      </div>
+
+      <aside class="how-panel">
+        <p class="eyebrow">HOW IT WORKS</p>
+        <ol class="steps">
+          <li><span>01</span><div><strong>Upload</strong><p>Select a clear passport scan or PDF.</p></div></li>
+          <li><span>02</span><div><strong>Read</strong><p>OCR finds the visible fields and MRZ.</p></div></li>
+          <li><span>03</span><div><strong>Review</strong><p>Check the result before you use it.</p></div></li>
+        </ol>
+        <div class="tip"><span aria-hidden="true">✳</span><p><strong>Best results</strong><br>Use a straight-on, well-lit image with all four corners visible.</p></div>
+      </aside>
+    </section>
+
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results-head">
+        <div><p class="eyebrow">EXTRACTION RESULT</p><h2 id="result-title">Passport details</h2></div>
+        <div class="result-actions"><button class="button button-quiet" id="copy-button" type="button">Copy JSON <span aria-hidden="true">□</span></button><button class="button button-outline" id="reset-button" type="button">New scan <span aria-hidden="true">↻</span></button></div>
+      </div>
+      <div class="scan-status" id="scan-status"><span class="spinner"></span><span id="status-text">Preparing your scan…</span></div>
+      <div class="result-grid" id="result-grid"></div>
+      <div class="mrz-block">
+        <div class="field-heading"><div><p class="eyebrow">MACHINE READABLE ZONE</p><h3>MRZ lines</h3></div><span class="validation-pill" id="mrz-validation">Waiting</span></div>
+        <div class="mrz-lines" id="mrz-lines"><span>MRZ will appear here after scanning.</span></div>
+      </div>
+      <details class="raw-details"><summary>View raw OCR text</summary><pre id="raw-text"></pre></details>
+    </section>
+
+    <footer><span>PASSAGE / DOCUMENT INTELLIGENCE</span><span>NO UPLOADS · NO STORAGE</span></footer>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
