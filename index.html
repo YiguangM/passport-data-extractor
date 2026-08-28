@@ -26,6 +26,25 @@
       <p class="lede">Upload an image or PDF. We’ll read the document, validate its MRZ, and lay every detected field out for review.</p>
     </section>
 
+    <section class="engine-panel" aria-label="Extraction engine">
+      <p class="eyebrow">EXTRACTION ENGINE</p>
+      <div class="engine-toggle" role="radiogroup" aria-label="Choose extraction engine">
+        <label class="engine-option">
+          <input type="radio" name="engine" value="local" id="engine-local" checked>
+          <span><strong>Local OCR</strong><small>Runs fully in your browser. Free, private, no upload.</small></span>
+        </label>
+        <label class="engine-option">
+          <input type="radio" name="engine" value="gemini" id="engine-gemini">
+          <span><strong>Gemini API</strong><small>Cloud vision model. Reads varied layouts far more reliably.</small></span>
+        </label>
+      </div>
+      <div class="api-key-field" id="api-key-field" hidden>
+        <label for="api-key-input">Gemini API key</label>
+        <input type="password" id="api-key-input" placeholder="Paste your API key" autocomplete="off" spellcheck="false">
+        <p class="key-note">Free key from <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a> · saved only in this browser · <strong>your document is sent to Google in this mode</strong></p>
+      </div>
+    </section>
+
     <section class="workspace" aria-label="Passport extraction workspace">
       <div class="upload-panel" id="drop-zone">
         <div class="upload-inner">
@@ -35,7 +54,7 @@
           <p class="upload-help">PNG, JPG, WEBP or PDF · up to 15 MB</p>
           <label class="button button-primary" for="file-input">Choose a file <span aria-hidden="true">↗</span></label>
           <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" hidden>
-          <p class="privacy-note"><span aria-hidden="true">⌁</span> Your document stays in this browser</p>
+          <p class="privacy-note"><span aria-hidden="true">⌁</span> <span id="privacy-note-text">Your document stays in this browser</span></p>
         </div>
         <div class="drop-overlay">Release to scan</div>
       </div>
@@ -65,7 +84,7 @@
       <details class="raw-details"><summary>View raw OCR text</summary><pre id="raw-text"></pre></details>
     </section>
 
-    <footer><span>PASSAGE / DOCUMENT INTELLIGENCE</span><span>NO UPLOADS · NO STORAGE</span></footer>
+    <footer><span>PASSAGE / DOCUMENT INTELLIGENCE</span><span id="footer-note">NO UPLOADS · NO STORAGE</span></footer>
   </main>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
